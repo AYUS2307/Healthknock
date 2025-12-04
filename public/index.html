@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Health Diagnosis - Login</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* ---------------- GLOBAL PREMIUM BACKGROUND ---------------- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #07051a, #0a0f48, #0a1a3d);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Floating circles animation */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .circle1 { width: 350px; height: 350px; background: #5f2eea; top: 10%; left: 5%; }
+        .circle2 { width: 300px; height: 300px; background: #18b2ff; bottom: 5%; right: 10%; }
+        .circle3 { width: 250px; height: 250px; background: #ff0099; top: 50%; right: 30%; }
+
+        @keyframes float {
+            from { transform: translateY(0px); }
+            to   { transform: translateY(-40px); }
+        }
+
+        /* ---------------- GLASS CONTAINER ---------------- */
+        .glass-container {
+            width: 380px;
+            margin: 120px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(0, 164, 255, 0.3);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1.5s ease forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-container h2 {
+            color: white;
+            letter-spacing: 1px;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* ---------------- INPUT FIELDS ---------------- */
+        input {
+            width: 90%;
+            padding: 14px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        input::placeholder {
+            color: #ddd;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 0 10px #00eaff;
+        }
+
+        /* ---------------- BUTTON ---------------- */
+        .btn {
+            width: 80%;
+            padding: 14px;
+            background: linear-gradient(135deg, #009dff, #0066ff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 18px #00eaff;
+        }
+
+        /* ------------ Extra Links -------------- */
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #00eaff;
+            font-size: 14px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .links a:hover {
+            color: #ff00d4;
+        }
+
+        /* ------------- LOGO -------------- */
+        .logo {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            font-size: 22px;
+            letter-spacing: 1px;
+            animation: glow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00eaff; }
+            to   { text-shadow: 0 0 25px #ff00c8; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Background Circles -->
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+    <div class="bg-circle circle3"></div>
+
+    <div class="logo">⚕ AI Health Diagnosis System</div>
+
+    <div class="glass-container" id="loginBox">
+        <h2>User Login</h2>
+
+        <input type="text" placeholder="Enter Email">
+        <input type="password" placeholder="Enter Password">
+
+        <button class="btn" onclick="loginUser()">Login</button>
+
+        <div class="links">
+            <a href="#">Forgot Password?</a><br>
+            <a href="register.html">Create New Account</a>
+        </div>
+    </div>
+
+    <script>
+        // GSAP Animation
+        gsap.from("#loginBox", {
+            duration: 1.6,
+            scale: 0.7,
+            opacity: 0,
+            ease: "power4.out"
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hospital Module</title>
+
+<style>
+
+/* ------------------ GLOBAL BACKGROUND ------------------ */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+    height: 100vh;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Floating particle background */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: url("https://i.imgur.com/9h0fBGK.png");
+    opacity: 0.15;
+    animation: floatBg 28s linear infinite;
+    z-index: -1;
+}
+@keyframes floatBg {
+    from { transform: translate(0,0) scale(1.2); }
+    to   { transform: translate(-300px,-300px) scale(1.2); }
+}
+
+/* ------------------ HEADING ------------------ */
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 42px;
+    animation: fadeDown 1s ease;
+    letter-spacing: 2px;
+}
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------ GLASS PANEL ------------------ */
+.glass-box {
+    width: 75%;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.2);
+
+    animation: fadeUp 1s ease;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4),
+                inset 0 0 20px rgba(255,255,255,0.1);
+}
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px);}
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* ------------------ STAT CARDS ------------------ */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    width: 220px;
+    height: 130px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+
+    animation: popUp 1s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
+    transition: 0.35s ease;
+}
+@keyframes popUp {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+.stat-card:hover {
+    transform: translateY(-10px) scale(1.07);
+    box-shadow: 0 0 30px #00eaff, inset 0 0 20px rgba(255,255,255,0.2);
+}
+
+/* ------------------ GLOW BUTTON ------------------ */
+.btn {
+    margin-top: 20px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg,#00eaff,#0096ff);
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+
+    transition: 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,200,255,0.8);
+}
+.btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 40px rgba(0,220,255,1),
+                0 0 60px rgba(0,200,255,0.7);
+}
+
+/* ------------------ TABLE STYLING ------------------ */
+.table-container {
+    margin-top: 35px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+th {
+    background: rgba(0,255,255,0.2);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+td {
+    background: rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+tr:hover td {
+    background: rgba(255,255,255,0.2);
+    transition: 0.3s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Hospital Resource Management</h1>
+
+<!-- MAIN GLASS BOX -->
+<div class="glass-box">
+    <h2>Resource Summary</h2>
+    <p>Monitor doctor availability, room capacity, ICU units, beds, and emergency readiness.</p>
+
+    <!-- STAT CARDS -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>Doctors Available</h3>
+            <h1>18</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Beds Free</h3>
+            <h1>42</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>ICU Units</h3>
+            <h1>05</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Operation Rooms</h3>
+            <h1>03</h1>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-container">
+        <h2 style="margin-top:30px;">Live Room & ICU Status</h2>
+
+        <table>
+            <tr>
+                <th>Room No</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Current Patient</th>
+            </tr>
+
+            <tr>
+                <td>102</td>
+                <td>General</td>
+                <td>Occupied</td>
+                <td>Rahul Kumar</td>
+            </tr>
+
+            <tr>
+                <td>207</td>
+                <td>ICU</td>
+                <td>Available</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td>315</td>
+                <td>Private</td>
+                <td>Occupied</td>
+                <td>Anjali Sharma</td>
+            </tr>
+
+            <tr>
+                <td>410</td>
+                <td>Emergency</td>
+                <td>Available</td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- BUTTON -->
+    <center>
+        <button class="btn">Update Resources</button>
+    </center>
+</div>
+
+</body>
+</html>

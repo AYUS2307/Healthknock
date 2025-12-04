@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Introduction | AI Health Diagnosis</title>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Premium Internal CSS -->
+    <style>
+        /* ---------------- GLOBAL BACKGROUND ---------------- */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0b0f2f, #0a173a, #0d1f52);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating glowing circles */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.65;
+            animation: move 12s infinite ease-in-out alternate;
+        }
+
+        .c1 { width: 350px; height: 350px; background: #6a00ff; top: 10%; left: 5%; }
+        .c2 { width: 260px; height: 260px; background: #00c3ff; bottom: 15%; right: 8%; }
+        .c3 { width: 220px; height: 220px; background: #ff009d; top: 40%; right: 25%; }
+
+        @keyframes move {
+            from { transform: translateY(0px); }
+            to   { transform: translateY(-45px); }
+        }
+
+        /* ---------------- GLASS CONTENT CARD ---------------- */
+        .intro-box {
+            width: 70%;
+            margin: 120px auto;
+            padding: 35px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 0 40px rgba(0, 169, 255, 0.28);
+            color: white;
+            position: relative;
+            z-index: 5;
+            opacity: 0;
+        }
+
+        .intro-box h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px rgba(0, 225, 255, 0.5);
+        }
+
+        .intro-box p {
+            font-size: 19px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #e3e3e3;
+        }
+
+        /* ---------------- BUTTON ---------------- */
+        .btn {
+            display: block;
+            margin: 0 auto;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #009dff, #0066ff);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px #00e7ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Background Shapes -->
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+
+    <!-- INTRO CARD -->
+    <div class="intro-box" id="introBox">
+        <h1>AI Health Diagnosis System</h1>
+
+        <p>
+            Welcome to our advanced AI-powered medical support platform.  
+            This system allows patients to receive smart health assessments,  
+            doctors to register and verify credentials, hospitals to manage  
+            resources efficiently, and pharmacies to keep medicine stock updated.  
+            With modern automation and AI insights, healthcare becomes  
+            faster, smarter, and more accessible.
+        </p>
+
+        <button class="btn" onclick="goTo('dashboard.html')">Go to Dashboard</button>
+    </div>
+
+    <script>
+        // GSAP Animation
+        gsap.to("#introBox", {
+            duration: 1.5,
+            opacity: 1,
+            y: -20,
+            ease: "power3.out"
+        });
+    </script>
+
+    <script>
+        function goTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>

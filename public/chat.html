@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Health Diagnosis Chatbot</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating particles effect */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("https://i.imgur.com/9h0fBGK.png");
+            opacity: 0.12;
+            animation: floatBg 30s linear infinite;
+        }
+        @keyframes floatBg {
+            from { transform: translate(0,0) scale(1.2); }
+            to   { transform: translate(-300px,-300px) scale(1.2); }
+        }
+
+        /* Chat container with glassmorphism */
+        .chat-container {
+            width: 480px;
+            height: 80vh;
+            margin: 40px auto;
+            
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+
+            box-shadow: 0 0 25px rgba(255,255,255,0.1),
+                        0 0 40px rgba(0,0,0,0.6) inset;
+
+            display: flex;
+            flex-direction: column;
+
+            animation: dropIn 0.9s ease-out;
+        }
+
+        @keyframes dropIn {
+            from { transform: translateY(-40px); opacity: 0; }
+            to   { transform: translateY(0); opacity: 1; }
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .messages::-webkit-scrollbar {
+            width: 7px;
+        }
+        .messages::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.25);
+            border-radius: 8px;
+        }
+
+        .message {
+            margin: 12px 0;
+            padding: 12px 18px;
+
+            border-radius: 12px;
+            max-width: 80%;
+
+            animation: fadeSlide 0.4s ease;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .user {
+            background: linear-gradient(135deg, #006eff, #3b82f6);
+            color: white;
+            margin-left: auto;
+            box-shadow: 0 0 12px rgba(0,123,255,0.6);
+        }
+
+        .bot {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Typing effect for bot */
+        .typing {
+            border-right: 2px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20) forwards, blink 0.7s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to   { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Input Box */
+        #inputBox {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.4);
+            outline: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: #d1d5db;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg,#22c55e,#16a34a);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.25s;
+            box-shadow: 0 0 10px rgba(34,197,94,0.6);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(34,197,94,1),
+                        0 0 25px rgba(34,197,94,0.7);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div id="messages" class="messages"></div>
+
+    <div id="inputBox">
+        <input type="text" id="userInput" placeholder="Describe symptoms...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    const messagesDiv = document.getElementById("messages");
+
+    function appendMessage(text, sender, typing=false) {
+        const div = document.createElement("div");
+        div.classList.add("message", sender);
+
+        if (typing) {
+            div.classList.add("typing");
+        }
+
+        div.innerText = text;
+        messagesDiv.appendChild(div);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById("userInput");
+        const text = input.value.trim();
+        if (!text) return;
+
+        appendMessage(text, "user");
+        input.value = "";
+
+        // Show typing animation for bot
+        const typingDiv = document.createElement("div");
+        typingDiv.classList.add("message", "bot");
+        typingDiv.innerText = "Typing...";
+        messagesDiv.appendChild(typingDiv);
+
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        // Send to backend
+        const response = await fetch("http://localhost:5000/api/ai/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+
+        typingDiv.remove();
+
+        appendMessage(data.reply, "bot");
+    }
+</script>
+
+</body>
+</html>

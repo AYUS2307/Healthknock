@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Health Dashboard</title>
+
+<style>
+
+/* ------------------- GLOBAL PREMIUM BACKGROUND ------------------- */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+    height: 100vh;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Floating particle background */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: url("https://i.imgur.com/9h0fBGK.png");
+    opacity: 0.17;
+    animation: floatBg 25s linear infinite;
+}
+@keyframes floatBg {
+    from { transform: translate(0,0) scale(1.3); }
+    to   { transform: translate(-300px,-300px) scale(1.3); }
+}
+
+/* ------------------- PAGE TITLE ------------------- */
+h1 {
+    font-size: 45px;
+    text-align: center;
+    margin-top: 40px;
+    letter-spacing: 2px;
+    animation: fadeSlide 1s ease;
+}
+
+/* ------------------- CARD GRID ------------------- */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* ------------------- STYLISH CARDS ------------------- */
+.card {
+    width: 200px;
+    height: 140px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4),
+                inset 0 0 20px rgba(255,255,255,0.1);
+
+    transition: 0.4s ease;
+    position: relative;
+
+    animation: popUp 1s ease;
+}
+
+/* Glow & scale on hover */
+.card:hover {
+    transform: translateY(-12px) scale(1.08);
+    box-shadow: 0 0 25px rgba(0,255,255,0.7),
+                0 0 40px rgba(0,128,255,0.6),
+                inset 0 0 20px rgba(255,255,255,0.15);
+    border: 1px solid rgba(0,255,255,0.4);
+}
+
+/* Smooth fade + slide */
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card popup animation */
+@keyframes popUp {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ------------------- AI CHAT BUTTON ------------------- */
+.btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg,#22d3ee,#0ea5e9);
+    border: none;
+    border-radius: 14px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+
+    box-shadow: 0 0 15px rgba(0,200,255,0.8);
+
+    transition: 0.3s ease;
+
+    animation: fadeSlide 1s ease;
+}
+
+.btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 35px rgba(0,220,255,1),
+                0 0 60px rgba(0,200,255,0.7);
+}
+
+
+/* ------------------- FADE-IN CONTAINER ------------------- */
+.fadeBox {
+    animation: fadeSlide 1s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>AI Health Dashboard</h1>
+
+<div class="dashboard-container fadeBox">
+    <div class="card" onclick="goTo('doctor.html')">Doctors</div>
+    <div class="card" onclick="goTo('patient.html')">Patients</div>
+    <div class="card" onclick="goTo('hospital.html')">Hospitals</div>
+    <div class="card" onclick="goTo('pharmacy.html')">Pharmacy</div>
+</div>
+
+<div style="text-align:center; margin-top:50px;">
+    <button class="btn" onclick="goTo('chat.html')">AI Health Chat</button>
+</div>
+
+
+<script>
+function goTo(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>
+
